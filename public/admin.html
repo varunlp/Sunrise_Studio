@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise Hotel — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- ═══ LOGIN PAGE ═══ -->
+  <div class="login-page" id="loginPage">
+    <div class="login-bg"></div>
+    <div class="login-card">
+      <div class="login-header">
+        <span class="login-logo">☀</span>
+        <h1>Sunrise Hotel</h1>
+        <p>Admin Dashboard</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text">Sign In</span>
+          <span class="btn-loading" style="display:none;">Signing in...</span>
+        </button>
+      </form>
+      <a href="/" class="back-link">← Back to Hotel Website</a>
+    </div>
+  </div>
+
+  <!-- ═══ ADMIN DASHBOARD ═══ -->
+  <div class="dashboard" id="dashboard" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">☀</span>
+        <div>
+          <h2>Sunrise</h2>
+          <span class="sidebar-role">Admin Panel</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" data-tab="overview" onclick="switchTab('overview', this)">
+          <span class="sidebar-icon">📊</span> Overview
+        </a>
+        <a href="#" class="sidebar-link" data-tab="bookings" onclick="switchTab('bookings', this)">
+          <span class="sidebar-icon">📋</span> Bookings
+        </a>
+        <a href="#" class="sidebar-link" data-tab="rooms" onclick="switchTab('rooms', this)">
+          <span class="sidebar-icon">🏨</span> Rooms
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="admin-user">
+          <div class="admin-avatar">A</div>
+          <div>
+            <span class="admin-name" id="adminName">Admin</span>
+            <span class="admin-label">Administrator</span>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+        <a href="/" class="sidebar-back">← Back to Website</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-bar">
+        <div>
+          <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
+          <p class="page-subtitle">Welcome back, <span id="welcomeName">Admin</span></p>
+        </div>
+        <div class="top-actions">
+          <button class="btn-refresh" onclick="refreshData()">🔄 Refresh</button>
+        </div>
+      </header>
+
+      <!-- Overview Tab -->
+      <div class="tab-content active" id="tab-overview">
+        <div class="stats-grid">
+          <div class="stat-card stat-total">
+            <div class="stat-icon">📊</div>
+            <div>
+              <span class="stat-value" id="statTotal">0</span>
+              <span class="stat-name">Total Bookings</span>
+            </div>
+          </div>
+          <div class="stat-card stat-pending">
+            <div class="stat-icon">⏳</div>
+            <div>
+              <span class="stat-value" id="statPending">0</span>
+              <span class="stat-name">Pending</span>
+            </div>
+          </div>
+          <div class="stat-card stat-confirmed">
+            <div class="stat-icon">✅</div>
+            <div>
+              <span class="stat-value" id="statConfirmed">0</span>
+              <span class="stat-name">Confirmed</span>
+            </div>
+          </div>
+          <div class="stat-card stat-revenue">
+            <div class="stat-icon">💰</div>
+            <div>
+              <span class="stat-value" id="statRevenue">$0</span>
+              <span class="stat-name">Revenue</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Bookings</h3>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Guest</th>
+                  <th>Room</th>
+                  <th>Check-in</th>
+                  <th>Check-out</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="overviewBookings">
+                <tr><td colspan="8" class="empty-state">Loading bookings...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookings Tab -->
+      <div class="tab-content" id="tab-bookings">
+        <div class="card">
+          <div class="card-header">
+            <h3>All Bookings</h3>
+            <div class="filter-group">
+              <select id="statusFilter" onchange="filterBookings()">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <input type="text" id="searchBooking" placeholder="Search by name or ref..." oninput="filterBookings()">
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Guest</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Room</th>
+                  <th>Check-in</th>
+                  <th>Check-out</th>
+                  <th>Guests</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="allBookings">
+                <tr><td colspan="11" class="empty-state">Loading bookings...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rooms Tab -->
+      <div class="tab-content" id="tab-rooms">
+        <div class="card">
+          <div class="card-header">
+            <h3>Room Management</h3>
+            <div class="room-stats">
+              <span class="room-stat-badge available">
+                <span id="availableCount">0</span> Available
+              </span>
+              <span class="room-stat-badge total-rooms">
+                <span id="totalRoomCount">0</span> Total
+              </span>
+            </div>
+          </div>
+          <div class="rooms-admin-grid" id="adminRoomsGrid">
+            <p class="empty-state">Loading rooms...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon"></span>
+    <span class="toast-msg"></span>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sunrise Hotel — Experience luxury redefined. Book your dream stay with panoramic views, world-class amenities, and impeccable service.">
+  <title>Sunrise Hotel — Luxury Redefined</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">☀</span>
+        <span class="logo-text">Sunrise <span class="logo-accent">Hotel</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#rooms" class="nav-link">Rooms</a></li>
+        <li><a href="#amenities" class="nav-link">Amenities</a></li>
+        <li><a href="#booking" class="nav-link">Book Now</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/admin.html" class="nav-admin-link">Admin</a>
+        <button class="nav-cta" onclick="scrollToSection('booking')">Reserve Now</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO SECTION ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <p class="hero-tagline" data-animate="fade-up">✦ LUXURY REDEFINED ✦</p>
+      <h1 class="hero-title" data-animate="fade-up" data-delay="200">
+        Where Every<br>
+        <span class="hero-title-accent">Sunrise</span> Tells<br>
+        A Story
+      </h1>
+      <p class="hero-subtitle" data-animate="fade-up" data-delay="400">
+        Discover an extraordinary escape where timeless elegance<br>
+        meets modern luxury on the world's most stunning coastline.
+      </p>
+      <div class="hero-buttons" data-animate="fade-up" data-delay="600">
+        <button class="btn btn-primary btn-glow" onclick="scrollToSection('rooms')">
+          Explore Rooms
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn btn-outline" onclick="scrollToSection('about')">
+          Our Story
+        </button>
+      </div>
+      <div class="hero-stats" data-animate="fade-up" data-delay="800">
+        <div class="hero-stat">
+          <span class="stat-number" data-count="150">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Luxury Rooms</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="50">0</span><span class="stat-plus">K+</span>
+          <span class="stat-label">Happy Guests</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="15">0</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator" data-animate="fade-up" data-delay="1000">
+      <span>Scroll to Explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT SECTION ═══ -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">About Us</div>
+      <h2 class="section-title" data-animate="fade-up">
+        A Legacy of<br><span class="text-gold">Unforgettable</span> Experiences
+      </h2>
+      <div class="about-grid">
+        <div class="about-text" data-animate="fade-right">
+          <p class="about-lead">
+            For over 15 years, Sunrise Hotel has been the epitome of luxury hospitality. 
+            Nestled on a pristine coastline, we offer an unparalleled blend of natural beauty, 
+            world-class service, and opulent comfort.
+          </p>
+          <p>
+            Every detail has been meticulously crafted to create moments that linger long after your stay.
+            From our Michelin-starred restaurants to our award-winning spa, every touchpoint is designed 
+            to exceed your expectations.
+          </p>
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="feature-icon">🏆</div>
+              <div>
+                <h4>Award Winning</h4>
+                <p>5-star rated for 10 consecutive years</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon">🌍</div>
+              <div>
+                <h4>World Class</h4>
+                <p>Ranked among top 50 hotels globally</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon">💎</div>
+              <div>
+                <h4>Premium Service</h4>
+                <p>24/7 concierge & personalized care</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual" data-animate="fade-left">
+          <div class="about-image-stack">
+            <div class="about-img about-img-1">
+              <img src="/images/room2.jpg" alt="Presidential Suite">
+            </div>
+            <div class="about-img about-img-2">
+              <img src="/images/room1.jpg" alt="Ocean View">
+            </div>
+            <div class="about-experience-badge">
+              <span class="exp-number">15+</span>
+              <span class="exp-text">Years of<br>Excellence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ROOMS SECTION ═══ -->
+  <section class="rooms section" id="rooms">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">Our Rooms</div>
+      <h2 class="section-title" data-animate="fade-up">
+        Exquisite <span class="text-gold">Accommodations</span><br>For Every Occasion
+      </h2>
+      <p class="section-subtitle" data-animate="fade-up">
+        From intimate retreats to grand suites, each room is a masterpiece of comfort and design.
+      </p>
+      <div class="rooms-grid" id="roomsGrid">
+        <!-- Rooms loaded dynamically -->
+        <div class="rooms-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading our finest rooms...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AMENITIES SECTION ═══ -->
+  <section class="amenities section" id="amenities">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">Amenities</div>
+      <h2 class="section-title" data-animate="fade-up">
+        World-Class <span class="text-gold">Facilities</span>
+      </h2>
+      <div class="amenities-grid">
+        <div class="amenity-card" data-animate="fade-up" data-delay="0">
+          <div class="amenity-icon">🍽️</div>
+          <h3>Fine Dining</h3>
+          <p>Three Michelin-starred restaurants offering cuisines from around the world</p>
+        </div>
+        <div class="amenity-card" data-animate="fade-up" data-delay="100">
+          <div class="amenity-icon">💆</div>
+          <h3>Luxury Spa</h3>
+          <p>Award-winning spa with exotic treatments, sauna, and thermal pools</p>
+        </div>
+        <div class="amenity-card" data-animate="fade-up" data-delay="200">
+          <div class="amenity-icon">🏊</div>
+          <h3>Infinity Pool</h3>
+          <p>Ocean-edge infinity pool with private cabanas and poolside service</p>
+        </div>
+        <div class="amenity-card" data-animate="fade-up" data-delay="300">
+          <div class="amenity-icon">🏋️</div>
+          <h3>Fitness Center</h3>
+          <p>State-of-the-art equipment with personal trainers and yoga classes</p>
+        </div>
+        <div class="amenity-card" data-animate="fade-up" data-delay="400">
+          <div class="amenity-icon">🎵</div>
+          <h3>Lounge Bar</h3>
+          <p>Rooftop bar with live jazz, craft cocktails, and panoramic sunset views</p>
+        </div>
+        <div class="amenity-card" data-animate="fade-up" data-delay="500">
+          <div class="amenity-icon">🚗</div>
+          <h3>Concierge</h3>
+          <p>24/7 concierge, luxury airport transfers, and private excursions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOOKING SECTION ═══ -->
+  <section class="booking section" id="booking">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">Reservations</div>
+      <h2 class="section-title" data-animate="fade-up">
+        Book Your <span class="text-gold">Dream Stay</span>
+      </h2>
+      <p class="section-subtitle" data-animate="fade-up">
+        Secure your perfect room in just a few clicks. Instant confirmation guaranteed.
+      </p>
+
+      <div class="booking-wrapper" data-animate="fade-up">
+        <!-- Booking Form -->
+        <form class="booking-form" id="bookingForm">
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="form-step">1</span> Select Your Room
+            </h3>
+            <div class="form-group">
+              <label for="roomSelect">Choose a Room</label>
+              <select id="roomSelect" name="roomId" required>
+                <option value="">-- Select a room --</option>
+              </select>
+            </div>
+            <div class="selected-room-preview" id="selectedRoomPreview" style="display:none;">
+              <img id="previewImg" src="" alt="Room preview">
+              <div class="preview-info">
+                <h4 id="previewName"></h4>
+                <p id="previewPrice"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="form-step">2</span> Stay Details
+            </h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="checkIn">Check-in Date</label>
+                <input type="date" id="checkIn" name="checkIn" required>
+              </div>
+              <div class="form-group">
+                <label for="checkOut">Check-out Date</label>
+                <input type="date" id="checkOut" name="checkOut" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="guests">Number of Guests</label>
+              <select id="guests" name="guests" required>
+                <option value="1">1 Guest</option>
+                <option value="2" selected>2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="form-step">3</span> Guest Information
+            </h3>
+            <div class="form-group">
+              <label for="guestName">Full Name</label>
+              <input type="text" id="guestName" name="guestName" placeholder="John Doe" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guestEmail">Email Address</label>
+                <input type="email" id="guestEmail" name="guestEmail" placeholder="john@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="guestPhone">Phone Number</label>
+                <input type="tel" id="guestPhone" name="guestPhone" placeholder="+1 234 567 8900" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="specialRequests">Special Requests <span class="optional">(optional)</span></label>
+              <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special requests or preferences..."></textarea>
+            </div>
+          </div>
+
+          <!-- Price Summary -->
+          <div class="price-summary" id="priceSummary" style="display:none;">
+            <div class="price-row">
+              <span>Room</span>
+              <span id="summaryRoom">-</span>
+            </div>
+            <div class="price-row">
+              <span>Price per night</span>
+              <span id="summaryPerNight">-</span>
+            </div>
+            <div class="price-row">
+              <span>Nights</span>
+              <span id="summaryNights">-</span>
+            </div>
+            <div class="price-row price-total">
+              <span>Total</span>
+              <span id="summaryTotal">-</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-glow btn-full" id="bookBtn">
+            <span class="btn-text">Complete Reservation</span>
+            <span class="btn-loading" style="display:none;">
+              <span class="loading-spinner-sm"></span> Processing...
+            </span>
+          </button>
+        </form>
+
+        <!-- Booking Confirmation (hidden by default) -->
+        <div class="booking-confirmation" id="bookingConfirmation" style="display: none;">
+          <div class="confirmation-icon">✓</div>
+          <h3>Booking Confirmed!</h3>
+          <p class="confirmation-msg">Your reservation has been received. Our team will confirm shortly.</p>
+          <div class="confirmation-details">
+            <div class="conf-detail">
+              <span class="conf-label">Reference</span>
+              <span class="conf-value" id="confRef">-</span>
+            </div>
+            <div class="conf-detail">
+              <span class="conf-label">Room</span>
+              <span class="conf-value" id="confRoom">-</span>
+            </div>
+            <div class="conf-detail">
+              <span class="conf-label">Check-in</span>
+              <span class="conf-value" id="confCheckIn">-</span>
+            </div>
+            <div class="conf-detail">
+              <span class="conf-label">Check-out</span>
+              <span class="conf-value" id="confCheckOut">-</span>
+            </div>
+            <div class="conf-detail">
+              <span class="conf-label">Guests</span>
+              <span class="conf-value" id="confGuests">-</span>
+            </div>
+            <div class="conf-detail conf-total">
+              <span class="conf-label">Total Price</span>
+              <span class="conf-value" id="confTotal">-</span>
+            </div>
+          </div>
+          <button class="btn btn-outline" onclick="resetBooking()">Make Another Booking</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS SECTION ═══ -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">Guest Reviews</div>
+      <h2 class="section-title" data-animate="fade-up">
+        What Our <span class="text-gold">Guests</span> Say
+      </h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-animate="fade-up" data-delay="0">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"An absolutely magical experience. The ocean view suite took our breath away, and the service was beyond anything we've ever experienced."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ES</div>
+            <div>
+              <h4>Elena Stravinsky</h4>
+              <p>Moscow, Russia</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-animate="fade-up" data-delay="150">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Presidential Suite is worth every penny. The jacuzzi, the views, the butler — pure perfection. We've already booked our return visit."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JC</div>
+            <div>
+              <h4>James & Clara</h4>
+              <p>New York, USA</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-animate="fade-up" data-delay="300">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Perfect family holiday. The kids loved the play area, and we loved the spa. The staff went out of their way to make every moment special."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MK</div>
+            <div>
+              <h4>The Kapoor Family</h4>
+              <p>Mumbai, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT SECTION ═══ -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-badge" data-animate="fade-up">Contact</div>
+      <h2 class="section-title" data-animate="fade-up">
+        Get In <span class="text-gold">Touch</span>
+      </h2>
+      <div class="contact-grid">
+        <div class="contact-info" data-animate="fade-right">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Address</h4>
+              <p>123 Coastal Paradise Drive<br>Sunrise Bay, California 90210</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <p>+1 (800) SUNRISE<br>+1 (310) 555-0199</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <p>reservations@sunrisehotel.com<br>info@sunrisehotel.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Front Desk</h4>
+              <p>Available 24/7<br>Check-in: 3:00 PM | Check-out: 11:00 AM</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-map" data-animate="fade-left">
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <p>Sunrise Hotel</p>
+            <span>Sunrise Bay, California</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo">
+            <span class="logo-icon">☀</span>
+            <span class="logo-text">Sunrise <span class="logo-accent">Hotel</span></span>
+          </a>
+          <p>Where every sunrise tells a story. Experience luxury redefined on the world's most stunning coastline.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#about">About Us</a>
+          <a href="#rooms">Our Rooms</a>
+          <a href="#amenities">Amenities</a>
+          <a href="#booking">Book Now</a>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="#amenities">Fine Dining</a>
+          <a href="#amenities">Spa & Wellness</a>
+          <a href="#amenities">Events</a>
+          <a href="#contact">Concierge</a>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sunrise Hotel. All rights reserved. Built with ☀ and love.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Room Detail Modal -->
+  <div class="modal-overlay" id="roomModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-body">
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <div class="modal-content">
+          <span class="modal-type" id="modalType"></span>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-details">
+            <div class="modal-detail"><span>💰</span> <strong>$<span id="modalPrice"></span></strong> / night</div>
+            <div class="modal-detail"><span>👥</span> Up to <span id="modalCapacity"></span> guests</div>
+            <div class="modal-detail"><span>📐</span> <span id="modalSize"></span></div>
+          </div>
+          <div class="modal-amenities" id="modalAmenities"></div>
+          <button class="btn btn-primary btn-glow btn-full" onclick="bookThisRoom()">
+            Book This Room
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span class="toast-icon"></span>
+    <span class="toast-message"></span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

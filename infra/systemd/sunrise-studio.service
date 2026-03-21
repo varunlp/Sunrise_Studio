@@ -1,0 +1,16 @@
+[Unit]
+Description=Sunrise Studio Node.js application
+After=network.target
+
+[Service]
+Type=simple
+User=varun
+Group=varun
+WorkingDirectory=/home/varun/projects/sunrise-studio
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
