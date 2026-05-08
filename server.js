@@ -2,9 +2,10 @@ const express = require('express');
 const Database = require('better-sqlite3');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 const cors = require('cors');
 const path = require('path');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +16,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  secret: crypto.randomBytes(32).toString('hex'),
+  store: new SQLiteStore({
+    db: 'sessions.sqlite',
+    dir: './',
+  }),
+  secret: process.env.SESSION_SECRET || 'sunrise-secret-super-long-change-me', // Use an env var in prod
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
@@ -80,7 +85,7 @@ if (roomCount === 0) {
     {
       name: 'Ocean View Deluxe',
       type: 'deluxe',
-      description: 'Wake up to breathtaking panoramic ocean views in this luxuriously appointed suite. Featuring a private balcony, premium king-size bed, and floor-to-ceiling windows that frame the endless blue horizon.',
+      description: 'Wake up to breathtaking panoramic ocean views in this luxuriously appointed suite. Featuring a private balcony, premium king-size bed, and floor-to-ceiling windows that frame the coastline.',
       price: 299,
       capacity: 2,
       size: '45 sq m',
@@ -100,7 +105,7 @@ if (roomCount === 0) {
     {
       name: 'Garden Retreat Room',
       type: 'standard',
-      description: 'A serene escape nestled among lush tropical gardens. This beautifully designed room offers a peaceful ambiance with garden-view terrace, perfect for those seeking tranquility and natural beauty.',
+      description: 'A serene escape nestled among lush tropical gardens. This beautifully designed room offers a peaceful ambiance with garden-view terrace, perfect for those seeking tranquility and relaxation.',
       price: 189,
       capacity: 2,
       size: '35 sq m',
@@ -110,7 +115,7 @@ if (roomCount === 0) {
     {
       name: 'Skyline Penthouse',
       type: 'penthouse',
-      description: 'Perched on the top floor with 360-degree city views. This stunning penthouse features a rooftop deck, private pool, gourmet kitchen, and the most exclusive amenities available anywhere.',
+      description: 'Perched on the top floor with 360-degree city views. This stunning penthouse features a rooftop deck, private pool, gourmet kitchen, and the most exclusive amenities available.',
       price: 899,
       capacity: 6,
       size: '200 sq m',
@@ -277,8 +282,9 @@ app.post('/api/admin/login', (req, res) => {
 
 // POST admin logout
 app.post('/api/admin/logout', (req, res) => {
-  req.session.destroy();
-  res.json({ message: 'Logged out successfully' });
+  req.session.destroy(() => {
+    res.json({ message: 'Logged out successfully' });
+  });
 });
 
 // GET admin session check
