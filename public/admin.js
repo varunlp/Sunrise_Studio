@@ -23,6 +23,7 @@ async function checkAuth() {
     }
   } catch (err) {
     // Not logged in, show login page
+    console.error('Auth check failed:', err);
   }
 }
 
@@ -45,7 +46,8 @@ async function handleLogin(e) {
     const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
+      credentials: 'include'
     });
     const data = await res.json();
 
@@ -56,6 +58,7 @@ async function handleLogin(e) {
       showToast('Welcome back, ' + data.username + '! 🌅', 'success');
     }
   } catch (err) {
+    console.error('Login error:', err);
     errorEl.textContent = 'Network error. Please try again.';
   } finally {
     btnText.style.display = 'inline';
@@ -66,8 +69,10 @@ async function handleLogin(e) {
 
 async function logout() {
   try {
-    await fetch('/api/admin/logout', { method: 'POST' });
-  } catch (err) {}
+    await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
+  } catch (err) {
+    console.error('Logout error:', err);
+  }
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('loginPage').style.display = 'flex';
   showToast('Logged out successfully.', 'success');
@@ -85,7 +90,11 @@ function showDashboard(username) {
 //  DATA LOADING
 // ═══════════════════════════════════════════
 async function loadDashboardData() {
-  await Promise.all([loadStats(), loadBookings(), loadAdminRooms()]);
+  try {
+    await Promise.all([loadStats(), loadBookings(), loadAdminRooms()]);
+  } catch (err) {
+    console.error('Dashboard data load error:', err);
+  }
 }
 
 async function refreshData() {
@@ -95,8 +104,11 @@ async function refreshData() {
 
 async function loadStats() {
   try {
-    const res = await fetch('/api/admin/stats');
-    if (res.status === 401) return logout();
+    const res = await fetch('/api/admin/stats', { credentials: 'include' });
+    if (res.status === 401) {
+      console.warn('Session expired during stats load');
+      return logout();
+    }
     const stats = await res.json();
     document.getElementById('statTotal').textContent = stats.total;
     document.getElementById('statPending').textContent = stats.pending;
@@ -111,8 +123,11 @@ async function loadStats() {
 
 async function loadBookings() {
   try {
-    const res = await fetch('/api/admin/bookings');
-    if (res.status === 401) return logout();
+    const res = await fetch('/api/admin/bookings', { credentials: 'include' });
+    if (res.status === 401) {
+      console.warn('Session expired during bookings load');
+      return logout();
+    }
     allBookings = await res.json();
     renderBookingsTable('overviewBookings', allBookings.slice(0, 10));
     renderBookingsTable('allBookings', allBookings, true);
@@ -123,8 +138,11 @@ async function loadBookings() {
 
 async function loadAdminRooms() {
   try {
-    const res = await fetch('/api/admin/rooms');
-    if (res.status === 401) return logout();
+    const res = await fetch('/api/admin/rooms', { credentials: 'include' });
+    if (res.status === 401) {
+      console.warn('Session expired during rooms load');
+      return logout();
+    }
     allAdminRooms = await res.json();
     renderAdminRooms(allAdminRooms);
   } catch (err) {
@@ -196,7 +214,7 @@ function renderAdminRooms(rooms) {
 // ═══════════════════════════════════════════
 async function confirmBooking(id) {
   try {
-    const res = await fetch(`/api/admin/bookings/${id}/confirm`, { method: 'PUT' });
+    const res = await fetch(`/api/admin/bookings/${id}/confirm`, { method: 'PUT', credentials: 'include' });
     if (res.status === 401) return logout();
     const data = await res.json();
     if (res.ok) {
@@ -206,6 +224,7 @@ async function confirmBooking(id) {
       showToast(data.error || 'Failed to confirm.', 'error');
     }
   } catch (err) {
+    console.error('Confirm booking error:', err);
     showToast('Network error.', 'error');
   }
 }
@@ -213,7 +232,7 @@ async function confirmBooking(id) {
 async function cancelBooking(id) {
   if (!confirm('Are you sure you want to cancel this booking?')) return;
   try {
-    const res = await fetch(`/api/admin/bookings/${id}/cancel`, { method: 'PUT' });
+    const res = await fetch(`/api/admin/bookings/${id}/cancel`, { method: 'PUT', credentials: 'include' });
     if (res.status === 401) return logout();
     const data = await res.json();
     if (res.ok) {
@@ -223,13 +242,14 @@ async function cancelBooking(id) {
       showToast(data.error || 'Failed to cancel.', 'error');
     }
   } catch (err) {
+    console.error('Cancel booking error:', err);
     showToast('Network error.', 'error');
   }
 }
 
 async function toggleRoom(id) {
   try {
-    const res = await fetch(`/api/admin/rooms/${id}/toggle`, { method: 'PUT' });
+    const res = await fetch(`/api/admin/rooms/${id}/toggle`, { method: 'PUT', credentials: 'include' });
     if (res.status === 401) return logout();
     const data = await res.json();
     if (res.ok) {
@@ -239,6 +259,7 @@ async function toggleRoom(id) {
       showToast(data.error || 'Failed to update.', 'error');
     }
   } catch (err) {
+    console.error('Toggle room error:', err);
     showToast('Network error.', 'error');
   }
 }
