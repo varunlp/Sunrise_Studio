@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-User=varun
-Group=varun
-WorkingDirectory=/home/varun/projects/sunrise-studio
-ExecStart=/usr/bin/npm start
+User=varun_lp
+Group=varun_lp
+WorkingDirectory=/home/varun_lp/Sunrise_Studio
+ExecStart=/usr/local/nvm/versions/node/v24.15.0/bin/npm start
 Restart=on-failure
 RestartSec=5
 Environment=NODE_ENV=production

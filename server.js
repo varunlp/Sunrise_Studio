@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
   store: new SQLiteStore({
     db: 'sessions.sqlite',
-    dir: './',
+    dir: path.dirname(DB_PATH),
   }),
   secret: process.env.SESSION_SECRET || 'sunrise-secret-super-long-change-me', // Use an env var in prod
   resave: false,
@@ -219,6 +219,18 @@ app.post('/api/bookings', (req, res) => {
 
   if (checkInDate < today) return res.status(400).json({ error: 'Check-in date cannot be in the past.' });
   if (checkOutDate <= checkInDate) return res.status(400).json({ error: 'Check-out must be after check-in.' });
+
+  // Overlap check
+  const overlap = db.prepare(`
+    SELECT COUNT(*) as count FROM bookings
+    WHERE room_id = ? 
+    AND status IN ('pending', 'confirmed')
+    AND (check_in < ? AND check_out > ?)
+  `).get(roomId, checkOut, checkIn).count;
+
+  if (overlap > 0) {
+    return res.status(400).json({ error: 'Room is already booked for the selected dates.' });
+  }
 
   const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
   const totalPrice = nights * room.price;
